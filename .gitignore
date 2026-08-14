@@ -20,6 +20,7 @@ next-env.d.ts
 # production
 /build
 /public/script.js
+/public/t.js
 /public/recorder.js
 /geo
 /dist

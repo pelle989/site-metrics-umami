@@ -98,6 +98,9 @@ provider failure. Revisit off-provider backups before analytics becomes contract
 - Netlify's first deploy did not apply non-secret values from
   `[context.production.environment]` to Umami's build/runtime. They are intentionally committed
   under `[build.environment]` instead; `DATABASE_URL` and `APP_SECRET` remain secret UI values.
+- Netlify's Next.js runtime did not honor Umami 3.2.0's alternate tracker rewrite even though
+  `/api/config` reported `t.js`. The build now creates the configured tracker aliases as real
+  static files after Rollup builds `public/script.js`.
 - Umami 3.2.0 emits a forward-looking PostgreSQL client warning for `sslmode=require`. The
   current client treats it as full certificate verification. Recheck Neon's recommended URL and
   use an explicit supported verification mode during the next reviewed Umami/`pg` upgrade.
