@@ -13,3 +13,9 @@ included_files = ["node_modules/.geo/**"]
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
+
+[[redirects]]
+from = "https://site-metrics-admin.netlify.app/*"
+to = "https://metrics.joekirchner.com/:splat"
+status = 301
+force = true

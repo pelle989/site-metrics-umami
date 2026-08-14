@@ -8,7 +8,7 @@
 - Production branch: `codex/production`
 - Application host: Netlify Free
 - Database host: Neon Free project `Site Metrics Admin`
-- Public hostname: `metrics.<owned-domain>` (replace at deployment)
+- Public hostname: `metrics.joekirchner.com`
 
 The production branch is pinned to the release above. Do not automatically merge or deploy
 the upstream `master` branch.
@@ -40,7 +40,7 @@ Neon branch in Netlify's deploy-preview context.
    - `COLLECT_API_ENDPOINT=/api/e`
    - `DISABLE_TELEMETRY=1`
 5. Deploy and verify that the build creates/migrates the database successfully.
-6. Attach `metrics.<owned-domain>`, update DNS as instructed by Netlify, and wait for the TLS
+6. Attach `metrics.joekirchner.com`, update DNS as instructed by Netlify, and wait for the TLS
    certificate to become active.
 7. Log in with `admin` / `umami` and change the password immediately. Do not enable public
    share URLs by default.
@@ -53,7 +53,7 @@ where both serve the same site. Install this snippet after replacing all placeho
 ```html
 <script
   defer
-  src="https://metrics.example.com/t.js"
+  src="https://metrics.joekirchner.com/t.js"
   data-website-id="WEBSITE_ID"
   data-domains="example.com,www.example.com"
   data-do-not-track="true">
@@ -67,7 +67,7 @@ and verify that each archive opens.
 
 ## Monitoring and limits
 
-- Monitor `https://metrics.<owned-domain>/t.js` from an external HTTPS monitor.
+- Monitor `https://metrics.joekirchner.com/t.js` from an external HTTPS monitor.
 - Weekly for the first month, then monthly, review Netlify credits and Neon storage, CU-hours,
   and egress.
 - Start migration or paid-tier planning at 70% of any quota.
@@ -101,6 +101,8 @@ provider failure. Revisit off-provider backups before analytics becomes contract
 - Netlify's Next.js runtime did not honor Umami 3.2.0's alternate tracker rewrite even though
   `/api/config` reported `t.js`. The build now creates the configured tracker aliases as real
   static files after Rollup builds `public/script.js`.
+- GoDaddy DNS contains a `metrics` CNAME to `site-metrics-admin.netlify.app` and the Netlify
+  subdomain-ownership TXT record. Netlify issued HTTPS for `metrics.joekirchner.com`.
 - Umami 3.2.0 emits a forward-looking PostgreSQL client warning for `sslmode=require`. The
   current client treats it as full certificate verification. Recheck Neon's recommended URL and
   use an explicit supported verification mode during the next reviewed Umami/`pg` upgrade.
