@@ -5,7 +5,7 @@
 - Application: Umami
 - Release: `v3.2.0`
 - Upstream commit: `2f6e2b5ff256862a081d9e74bed18a42ebf795e3`
-- Production branch: `codex/production`
+- Production branch: `production` (local working branch: `codex/production`)
 - Application host: Netlify Free
 - Database host: Neon Free project `Site Metrics Admin`
 - Public hostname: `metrics.joekirchner.com`
@@ -29,7 +29,7 @@ Neon branch in Netlify's deploy-preview context.
 
 ## Netlify
 
-1. Import the GitHub repository and choose `codex/production` as the production branch.
+1. Import the GitHub repository and choose `production` as the production branch.
 2. Confirm the repository's `netlify.toml` is detected. It pins Node 22, runs
    `pnpm run build`, publishes `.next`, and activates Umami's Next.js adapter.
 3. Add production-scoped secrets in **Project configuration → Environment variables**:
