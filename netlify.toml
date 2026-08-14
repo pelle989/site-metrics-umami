@@ -4,14 +4,12 @@ publish = ".next"
 
 [build.environment]
 NODE_VERSION = "22"
+TRACKER_SCRIPT_NAME = "t.js"
+COLLECT_API_ENDPOINT = "/api/e"
+DISABLE_TELEMETRY = "1"
 
 [functions]
 included_files = ["node_modules/.geo/**"]
 
 [[plugins]]
 package = "@netlify/plugin-nextjs"
-
-[context.production.environment]
-TRACKER_SCRIPT_NAME = "t.js"
-COLLECT_API_ENDPOINT = "/api/e"
-DISABLE_TELEMETRY = "1"

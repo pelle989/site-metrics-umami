@@ -35,7 +35,7 @@ Neon branch in Netlify's deploy-preview context.
 3. Add production-scoped secrets in **Project configuration → Environment variables**:
    - `DATABASE_URL`: Neon pooled connection string
    - `APP_SECRET`: output of `openssl rand -hex 32`
-4. Confirm these committed production variables are present:
+4. Confirm these committed build variables are present:
    - `TRACKER_SCRIPT_NAME=t.js`
    - `COLLECT_API_ENDPOINT=/api/e`
    - `DISABLE_TELEMETRY=1`
@@ -92,3 +92,12 @@ Never point a deploy preview at the production database.
 No independent database backup is configured. Temporary Neon branches reduce migration risk,
 but they do not protect against Neon account or project loss, late-discovered deletion, or a
 provider failure. Revisit off-provider backups before analytics becomes contractually important.
+
+## Deployment notes
+
+- Netlify's first deploy did not apply non-secret values from
+  `[context.production.environment]` to Umami's build/runtime. They are intentionally committed
+  under `[build.environment]` instead; `DATABASE_URL` and `APP_SECRET` remain secret UI values.
+- Umami 3.2.0 emits a forward-looking PostgreSQL client warning for `sslmode=require`. The
+  current client treats it as full certificate verification. Recheck Neon's recommended URL and
+  use an explicit supported verification mode during the next reviewed Umami/`pg` upgrade.
